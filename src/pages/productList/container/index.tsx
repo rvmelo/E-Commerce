@@ -1,5 +1,6 @@
 import React from 'react';
+import Header from '../../../components/header';
 
-const ProductList: React.FC = () => <h1>Product list page</h1>;
+const ProductList: React.FC = () => <Header />;
 
 export default ProductList;
