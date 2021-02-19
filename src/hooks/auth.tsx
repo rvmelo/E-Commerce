@@ -2,7 +2,7 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
-interface User {
+interface Customer {
   id: string;
   name: string;
   email: string;
@@ -10,7 +10,7 @@ interface User {
 
 interface AuthState {
   token: string;
-  user: User;
+  customer: Customer;
 }
 
 interface SignInCredentials {
@@ -19,7 +19,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: User;
+  customer: Customer;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
@@ -29,11 +29,11 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState(() => {
     const token = localStorage.getItem('@E-Commerce:token');
-    const user = localStorage.getItem('@E-Commerce:user');
+    const customer = localStorage.getItem('@E-Commerce:customer');
 
-    if (token && user) {
+    if (token && customer) {
       api.defaults.headers.authorization = `Bearer ${token}`;
-      return { token, user: JSON.parse(user) };
+      return { token, customer: JSON.parse(customer) };
     }
 
     return {} as AuthState;
@@ -41,7 +41,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@E-Commerce:token');
-    localStorage.removeItem('@E-Commerce:user');
+    localStorage.removeItem('@E-Commerce:customer');
 
     setData({} as AuthState);
   }, []);
@@ -52,18 +52,18 @@ const AuthProvider: React.FC = ({ children }) => {
       password,
     });
 
-    const { user, token } = response.data;
+    const { customer, token } = response.data;
 
     localStorage.setItem('@E-Commerce:token', token);
-    localStorage.setItem('@E-Commerce:user', JSON.stringify(user));
+    localStorage.setItem('@E-Commerce:customer', JSON.stringify(customer));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
 
-    setData({ token, user });
+    setData({ token, customer });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider value={{ customer: data.customer, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
