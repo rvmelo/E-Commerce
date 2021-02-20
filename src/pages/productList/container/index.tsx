@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../../components/header';
+
 import { ListContainer, ProductContainer } from './styles';
 
 import api from '../../../services/api';
@@ -26,7 +27,16 @@ const ProductList: React.FC = () => {
       <Header />
       <ListContainer>
         {products.map(product => (
-          <Link to="/productlist">
+          <Link
+            to={{
+              pathname: '/product',
+              state: {
+                name: product.name,
+                price: product.price,
+                image: product.image,
+              },
+            }}
+          >
             <ProductContainer key={product.id}>
               <img src={product.image} alt={product.name} />
 

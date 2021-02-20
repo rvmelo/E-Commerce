@@ -25,6 +25,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+      "jsx-a11y/label-has-associated-control": "off",
       "react/jsx-curly-newline": "off",
       "no-confusing-arrow": "off",
       "operator-linebreak":"off",
