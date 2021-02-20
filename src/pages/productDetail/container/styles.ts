@@ -48,21 +48,20 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 30px;
 
   #quantity {
     margin-left: 30px;
+    margin-bottom: 30px;
+    color: #666360;
+    background: #232129;
+    border: 2px solid #232129;
+    border-radius: 5px;
   }
 
-  div {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 30px;
-
-    #observation {
-      margin-left: 30px;
-      width: 350px;
-      height: 125px;
-    }
+  label {
+    font-size: 16px;
+    font-weight: 500;
   }
 
   button {
@@ -79,14 +78,37 @@ export const Form = styled.form`
   }
 
   @media (max-width: 490px) {
+    margin-top: 0;
     div {
       flex-direction: column;
       align-items: center;
     }
+  }
+`;
 
-    #observation {
-      margin-top: 30px;
-      max-width: 250px;
-    }
+export const TextAreaContainer = styled.div`
+  color: #666360;
+  background: #232129;
+  border-radius: 10px;
+  padding: 16px;
+  border: 2px solid #232129;
+
+  #observation {
+    width: 350px;
+    height: 125px;
+    margin: auto;
+  }
+
+  textarea {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    color: #f4ede8;
+  }
+
+  @media (max-width: 490px) {
+    margin-top: 0px;
+    max-width: 250px;
+    padding: 10px;
   }
 `;

@@ -1,6 +1,13 @@
 import React, { FormEvent } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Container, ProductImage, Form, ProductData } from './styles';
+
+import {
+  Container,
+  ProductImage,
+  Form,
+  ProductData,
+  TextAreaContainer,
+} from './styles';
 
 interface ProductProps {
   name: string;
@@ -31,13 +38,14 @@ const ProductDetail: React.FC = () => {
           Quantidade:
           <input type="number" id="quantity" min={1} max={5} defaultValue={1} />
         </label>
-        <div>
-          <label htmlFor="observation">Observação:</label>
+
+        <TextAreaContainer>
           <textarea
             id="observation"
             placeholder="Digite observação sobre pedido"
           />
-        </div>
+        </TextAreaContainer>
+
         <button type="submit">Adicionar ao carrinho</button>
       </Form>
     </Container>
