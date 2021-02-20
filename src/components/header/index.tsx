@@ -27,14 +27,14 @@ const Header: React.FC = () => {
           <ul>
             <li>
               <NavLink to="/" exact activeClassName="is-active">
-                <FiShoppingCart />
-                Carrinho
+                <FiCreditCard />
+                Pagamento
               </NavLink>
             </li>
             <li>
               <NavLink to="/" exact activeClassName="is-active">
-                <FiCreditCard />
-                Pagamento
+                <FiShoppingCart />
+                Carrinho
               </NavLink>
             </li>
             <li>

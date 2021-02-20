@@ -41,7 +41,7 @@ const ProductList: React.FC = () => {
               <img src={product.image} alt={product.name} />
 
               <h1>{product.name}</h1>
-              <span>Preço: {product.price}</span>
+              <span>Preço: {product.price} R$</span>
             </ProductContainer>
           </Link>
         ))}

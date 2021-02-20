@@ -8,7 +8,7 @@ interface ProductProps {
   image: string;
 }
 
-const Product: React.FC = () => {
+const ProductDetail: React.FC = () => {
   const { name, price, image } = useLocation().state as ProductProps;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -44,4 +44,4 @@ const Product: React.FC = () => {
   );
 };
 
-export default Product;
+export default ProductDetail;
