@@ -28,16 +28,18 @@ const ProductList: React.FC = () => {
       <ListContainer>
         {products.map(product => (
           <Link
+            key={product.id}
             to={{
               pathname: '/product',
               state: {
+                product_id: product.id,
                 name: product.name,
-                price: product.price,
+                price: parseFloat(product.price),
                 image: product.image,
               },
             }}
           >
-            <ProductContainer key={product.id}>
+            <ProductContainer>
               <img src={product.image} alt={product.name} />
 
               <h1>{product.name}</h1>

@@ -32,7 +32,7 @@ const Header: React.FC = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" exact activeClassName="is-active">
+              <NavLink to="/cart" exact activeClassName="is-active">
                 <FiShoppingCart />
                 Carrinho
               </NavLink>

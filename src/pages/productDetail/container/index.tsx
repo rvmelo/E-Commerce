@@ -1,5 +1,6 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
+import useProductDetail from '../useProductDetail';
 
 import {
   Container,
@@ -9,18 +10,23 @@ import {
   TextAreaContainer,
 } from './styles';
 
-interface ProductProps {
+interface RouterProps {
+  product_id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
 }
 
 const ProductDetail: React.FC = () => {
-  const { name, price, image } = useLocation().state as ProductProps;
+  const { product_id, name, price, image } = useLocation().state as RouterProps;
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-  };
+  const {
+    handleSubmit,
+    setQuantity,
+    quantity,
+    setNote,
+    note,
+  } = useProductDetail();
 
   return (
     <Container>
@@ -30,18 +36,36 @@ const ProductDetail: React.FC = () => {
         </ProductImage>
 
         <h1>{name}</h1>
-        <h2>Preço: {price} R$</h2>
+        <h2>Preço: {(quantity * price).toFixed(2)} R$</h2>
       </ProductData>
 
-      <Form onSubmit={handleSubmit}>
+      <Form
+        onSubmit={e =>
+          handleSubmit(e, {
+            product_id,
+            name,
+            price,
+            quantity,
+            note,
+          })
+        }
+      >
         <label htmlFor="quantity">
           Quantidade:
-          <input type="number" id="quantity" min={1} max={5} defaultValue={1} />
+          <input
+            type="number"
+            onChange={e => setQuantity(Number(e.target.value))}
+            id="quantity"
+            min={1}
+            max={5}
+            defaultValue={1}
+          />
         </label>
 
         <TextAreaContainer>
           <textarea
             id="observation"
+            onChange={e => setNote(e.target.value)}
             placeholder="Digite observação sobre pedido"
           />
         </TextAreaContainer>

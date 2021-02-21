@@ -25,6 +25,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+      "no-param-reassign": "off",
       "jsx-a11y/label-has-associated-control": "off",
       "react/jsx-curly-newline": "off",
       "no-confusing-arrow": "off",
