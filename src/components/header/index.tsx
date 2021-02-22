@@ -1,11 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {
-  FiLogOut,
-  FiShoppingCart,
-  FiCoffee,
-  FiCreditCard,
-} from 'react-icons/fi';
+import { FiLogOut, FiShoppingCart, FiCoffee } from 'react-icons/fi';
 import { HeaderContainer } from './styles';
 import { useAuth } from '../../hooks/auth';
 
@@ -25,12 +20,6 @@ const Header: React.FC = () => {
       <div className="right-div">
         <nav>
           <ul>
-            <li>
-              <NavLink to="/" exact activeClassName="is-active">
-                <FiCreditCard />
-                Pagamento
-              </NavLink>
-            </li>
             <li>
               <NavLink to="/cart" exact activeClassName="is-active">
                 <FiShoppingCart />

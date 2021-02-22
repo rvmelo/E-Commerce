@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container } from './styles';
 import Header from '../../../components/header';
 import useCart from '../useCart';
@@ -6,6 +7,7 @@ import Button from '../../../components/button';
 
 const Cart: React.FC = () => {
   const { total, order } = useCart();
+  const history = useHistory();
 
   return (
     <>
@@ -37,7 +39,9 @@ const Cart: React.FC = () => {
           </tbody>
         </table>
 
-        <Button type="submit">Concluir Compra</Button>
+        <Button type="submit" onClick={() => history.push('/payment')}>
+          Concluir Compra
+        </Button>
       </Container>
     </>
   );
