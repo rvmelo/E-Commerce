@@ -7,7 +7,11 @@ import { useCallback, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useToast } from '../../hooks/toast';
+import { useRecord } from '../../hooks/record';
+import { useAuth } from '../../hooks/auth';
 import getValidationErrors from '../../utils/getValidationErrors';
+import api from '../../services/api';
+import { Order } from '../../interfaces';
 
 interface PaymentFormData {
   card_number: string;
@@ -27,9 +31,11 @@ function usePayment(): ReturnValue {
   const history = useHistory();
 
   const { addToast } = useToast();
+  const { order, setOrder } = useRecord();
+  const { customer } = useAuth();
 
   const handleSubmit = useCallback(
-    async (data: PaymentFormData) => {
+    async (paymentData: PaymentFormData) => {
       try {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
@@ -64,7 +70,7 @@ function usePayment(): ReturnValue {
             .required('País obrigatório'),
         });
 
-        await schema.validate(data, {
+        await schema.validate(paymentData, {
           abortEarly: false,
         });
 
@@ -73,6 +79,17 @@ function usePayment(): ReturnValue {
           title: 'Pagamento',
           description: 'Pagamento realizado com sucesso!',
         });
+
+        const orderResponse = await api.post('/orders', {
+          order_products: order.order_products,
+        });
+        await api.post('/transactions', {
+          ...paymentData,
+          order_id: orderResponse.data.id,
+        });
+
+        localStorage.removeItem(`@E-Commerce-${customer.id}:order`);
+        setOrder({} as Order);
 
         history.push('/productlist');
       } catch (err) {
@@ -89,7 +106,7 @@ function usePayment(): ReturnValue {
         });
       }
     },
-    [addToast, history],
+    [addToast, history, order.order_products, customer.id, setOrder],
   );
 
   return { handleSubmit, formRef };
