@@ -6,6 +6,8 @@ import { ListContainer, ProductContainer } from './styles';
 
 import api from '../../../services/api';
 
+import { useRecord } from '../../../hooks/record';
+
 interface Product {
   id: string;
   name: string;
@@ -15,12 +17,14 @@ interface Product {
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const { retrieveOrder } = useRecord();
 
   useEffect(() => {
+    retrieveOrder();
     api.get('/products').then(productList => {
       setProducts([...productList.data.products]);
     });
-  }, []);
+  }, [retrieveOrder]);
 
   return (
     <>

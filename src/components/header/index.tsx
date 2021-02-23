@@ -2,10 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FiLogOut, FiShoppingCart, FiCoffee } from 'react-icons/fi';
 import { HeaderContainer } from './styles';
-import { useAuth } from '../../hooks/auth';
+
+import useHeader from './useHeader';
 
 const Header: React.FC = () => {
-  const { customer, signOut } = useAuth();
+  const { handleSignOut, customer } = useHeader();
 
   return (
     <HeaderContainer>
@@ -34,7 +35,7 @@ const Header: React.FC = () => {
             </li>
           </ul>
         </nav>
-        <button onClick={signOut} type="submit">
+        <button onClick={handleSignOut} type="submit">
           <FiLogOut />
         </button>
       </div>

@@ -7,30 +7,44 @@ import React, {
   useState,
 } from 'react';
 
+import { useAuth } from './auth';
+
 import { OrderProduct, Order } from '../interfaces';
 
 interface RecordContextData {
   addOrderProduct(orderProduct: OrderProduct): void;
+  setOrder(order: Order): void;
+  retrieveOrder(): void;
   order: Order;
 }
 
 const RecordContext = createContext<RecordContextData>({} as RecordContextData);
 
 const RecordProvider: React.FC = ({ children }) => {
-  const [order, setOrder] = useState<Order>(() => {
-    const storedOrder = localStorage.getItem('@E-Commerce:order');
+  const { customer } = useAuth();
 
-    if (storedOrder) {
-      return JSON.parse(storedOrder);
-    }
-
-    return {} as Order;
-  });
+  const [order, setOrder] = useState<Order>({} as Order);
 
   useEffect(() => {
-    localStorage.setItem('@E-Commerce:order', JSON.stringify(order));
-    // localStorage.removeItem('@E-Commerce:order');
-  }, [order]);
+    if (customer && order && order.order_products) {
+      localStorage.setItem(
+        `@E-Commerce-${customer.id}:order`,
+        JSON.stringify(order),
+      );
+    }
+
+    // localStorage.clear();
+  }, [order, customer]);
+
+  const retrieveOrder = useCallback(() => {
+    const storedOrder = customer
+      ? localStorage.getItem(`@E-Commerce-${customer.id}:order`)
+      : undefined;
+
+    if (storedOrder) {
+      setOrder(JSON.parse(storedOrder));
+    }
+  }, [customer]);
 
   const addOrderProduct = useCallback((orderProduct: OrderProduct) => {
     setOrder(prev => ({
@@ -42,7 +56,9 @@ const RecordProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <RecordContext.Provider value={{ addOrderProduct, order }}>
+    <RecordContext.Provider
+      value={{ addOrderProduct, order, setOrder, retrieveOrder }}
+    >
       {children}
     </RecordContext.Provider>
   );

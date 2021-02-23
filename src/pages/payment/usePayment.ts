@@ -35,8 +35,7 @@ function usePayment(): ReturnValue {
         const schema = Yup.object().shape({
           card_number: Yup.string()
             .required('Número do cartão obrigatório')
-            .min(16, 'Cartão inválido')
-            .max(16, 'Cartão inválido'),
+            .min(16, 'Cartão inválido'),
           cvc: Yup.string()
             .min(3, 'CVC inválido')
             .max(3, 'CVC inválido')
