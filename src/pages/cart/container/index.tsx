@@ -40,9 +40,11 @@ const Cart: React.FC = () => {
           </tbody>
         </table>
 
-        <Button type="submit" onClick={() => history.push('/payment')}>
-          Concluir Compra
-        </Button>
+        {order.order_products && (
+          <Button type="submit" onClick={() => history.push('/payment')}>
+            Concluir Compra
+          </Button>
+        )}
       </Container>
     </>
   );

@@ -1,14 +1,12 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import useProductDetail from '../useProductDetail';
 
-import {
-  Container,
-  ProductImage,
-  Form,
-  ProductData,
-  TextAreaContainer,
-} from './styles';
+import Header from '../../../components/header';
+import FormComponent from './formComponent';
+import Button from '../../../components/button';
+
+import { Container, ProductImage, ProductData } from './styles';
 
 interface RouterProps {
   product_id: string;
@@ -18,61 +16,48 @@ interface RouterProps {
 }
 
 const ProductDetail: React.FC = () => {
-  const { product_id, name, price, image } = useLocation().state as RouterProps;
+  const { name, price, image, product_id } = useLocation().state as RouterProps;
+  const history = useHistory();
 
   const {
-    handleSubmit,
-    setQuantity,
     quantity,
+    setQuantity,
+    isProductOnCart,
     setNote,
     note,
-  } = useProductDetail();
+    handleSubmit,
+  } = useProductDetail({
+    product_id,
+  });
 
   return (
-    <Container>
-      <ProductData>
-        <ProductImage>
-          <img src={image} alt={name} />
-        </ProductImage>
+    <>
+      <Header />
+      <Container>
+        <ProductData>
+          <ProductImage>
+            <img src={image} alt={name} />
+          </ProductImage>
 
-        <h1>{name}</h1>
-        <h2>Preço: {(quantity * price).toFixed(2)} R$</h2>
-      </ProductData>
+          <h1>{name}</h1>
+          <h2>Preço: {(quantity * price).toFixed(2)} R$</h2>
+        </ProductData>
 
-      <Form
-        onSubmit={e =>
-          handleSubmit(e, {
-            product_id,
-            name,
-            price,
-            quantity,
-            note,
-          })
-        }
-      >
-        <label htmlFor="quantity">
-          Quantidade:
-          <input
-            type="number"
-            onChange={e => setQuantity(Number(e.target.value))}
-            id="quantity"
-            min={1}
-            max={5}
-            defaultValue={1}
+        {isProductOnCart ? (
+          <Button type="submit" onClick={() => history.push('/cart')}>
+            Ver Carrinho
+          </Button>
+        ) : (
+          <FormComponent
+            quantity={quantity}
+            setQuantity={setQuantity}
+            note={note}
+            setNote={setNote}
+            handleSubmit={handleSubmit}
           />
-        </label>
-
-        <TextAreaContainer>
-          <textarea
-            id="observation"
-            onChange={e => setNote(e.target.value)}
-            placeholder="Digite observação sobre pedido"
-          />
-        </TextAreaContainer>
-
-        <button type="submit">Adicionar ao carrinho</button>
-      </Form>
-    </Container>
+        )}
+      </Container>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { FormEvent, useCallback, useState } from 'react';
 import { useRecord } from '../../hooks/record';
+import { useToast } from '../../hooks/toast';
 import { OrderProduct } from '../../interfaces';
 
 interface ReturnValue {
@@ -12,21 +13,45 @@ interface ReturnValue {
   setQuantity(q: number): void;
   note: string;
   setNote(n: string): void;
+  isProductOnCart: boolean;
 }
 
-function useProductDetail(): ReturnValue {
+interface ProductProps {
+  product_id?: string;
+}
+
+function useProductDetail({ product_id }: ProductProps): ReturnValue {
   const [quantity, setQuantity] = useState(1);
   const [note, setNote] = useState('');
 
-  const { addOrderProduct } = useRecord();
+  const { addOrderProduct, order } = useRecord();
+
+  const { addToast } = useToast();
+
+  const [isProductOnCart, setIsProductOnCart] = useState(() => {
+    if (product_id && order.order_products) {
+      return !!order.order_products.find(
+        orderProduct => orderProduct.product_id === product_id,
+      );
+    }
+    return false;
+  });
 
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>, orderProduct: OrderProduct): void => {
       event.preventDefault();
 
+      setIsProductOnCart(true);
+
       addOrderProduct(orderProduct);
+
+      addToast({
+        type: 'success',
+        title: 'Carrinho',
+        description: 'Produto adicionado ao carrinho!',
+      });
     },
-    [addOrderProduct],
+    [addOrderProduct, addToast],
   );
 
   return {
@@ -35,6 +60,7 @@ function useProductDetail(): ReturnValue {
     setQuantity,
     note,
     setNote,
+    isProductOnCart,
   };
 }
 

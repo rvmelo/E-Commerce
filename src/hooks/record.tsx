@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 import React, {
   createContext,
@@ -26,7 +27,7 @@ const RecordProvider: React.FC = ({ children }) => {
   const [order, setOrder] = useState<Order>({} as Order);
 
   useEffect(() => {
-    if (customer && order && order.order_products) {
+    if (customer && order.order_products) {
       localStorage.setItem(
         `@E-Commerce-${customer.id}:order`,
         JSON.stringify(order),
@@ -47,12 +48,26 @@ const RecordProvider: React.FC = ({ children }) => {
   }, [customer]);
 
   const addOrderProduct = useCallback((orderProduct: OrderProduct) => {
-    setOrder(prev => ({
-      ...prev,
-      order_products: prev.order_products
-        ? [...prev.order_products, orderProduct]
-        : [{ ...orderProduct }],
-    }));
+    setOrder(prev => {
+      const orderProductIndex = prev.order_products
+        ? prev.order_products.findIndex(
+            op => op.product_id === orderProduct.product_id,
+          )
+        : -1;
+
+      if (orderProductIndex >= 0) {
+        prev.order_products[orderProductIndex].quantity +=
+          orderProduct.quantity;
+        return { ...prev };
+      }
+
+      return {
+        ...prev,
+        order_products: prev.order_products
+          ? [...prev.order_products, orderProduct]
+          : [{ ...orderProduct }],
+      };
+    });
   }, []);
 
   return (

@@ -1,12 +1,20 @@
-import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+
   align-items: center;
-  justify-content: space-around;
-  height: 100vh;
+  justify-content: space-evenly;
+  height: 80vh;
+
+  button {
+    width: 300px;
+  }
+
+  @media (max-width: 890px) {
+    flex-direction: column;
+    height: 100vh;
+  }
 `;
 
 export const ProductData = styled.div`
@@ -42,6 +50,11 @@ export const ProductImage = styled.div`
     width: 250px;
     height: 250px;
   }
+
+  @media (max-width: 890px) {
+    width: 200px;
+    height: 200px;
+  }
 `;
 
 export const Form = styled.form`
@@ -66,15 +79,6 @@ export const Form = styled.form`
 
   button {
     margin-top: 30px;
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-    background: #ff9000;
-    border-width: 0;
-
-    &:hover {
-      background: ${shade(0.2, '#ff9000')};
-    }
   }
 
   @media (max-width: 490px) {
