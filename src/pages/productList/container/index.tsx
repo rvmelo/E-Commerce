@@ -30,7 +30,7 @@ const ProductList: React.FC = () => {
               <img src={product.image} alt={product.name} />
 
               <h1>{product.name}</h1>
-              <span>Preço: {Number(product.price).toFixed(2)} R$</span>
+              <span>R$ {Number(product.price).toFixed(2)} </span>
             </ProductContainer>
           </Link>
         ))}

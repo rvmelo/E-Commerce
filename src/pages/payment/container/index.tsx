@@ -28,7 +28,7 @@ const Payment: React.FC = () => {
             className="card_information"
             name="card_validation_date"
             icon={BsCalendar}
-            placeholder="YY/MM"
+            placeholder="MM/AA"
           />
           <Input
             className="card_information"
