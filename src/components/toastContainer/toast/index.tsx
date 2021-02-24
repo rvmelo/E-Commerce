@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import {
   FiAlertCircle,
   FiXCircle,
@@ -49,4 +49,4 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
   );
 };
 
-export default Toast;
+export default memo(Toast);

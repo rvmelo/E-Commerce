@@ -1,30 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../../components/header';
 
 import { ListContainer, ProductContainer } from './styles';
 
-import api from '../../../services/api';
-
-import { useRecord } from '../../../hooks/record';
-
-interface Product {
-  id: string;
-  name: string;
-  price: string;
-  image: string;
-}
+import useProductList from '../useProductList';
 
 const ProductList: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const { retrieveOrder } = useRecord();
-
-  useEffect(() => {
-    retrieveOrder();
-    api.get('/products').then(productList => {
-      setProducts([...productList.data.products]);
-    });
-  }, [retrieveOrder]);
+  const { products } = useProductList();
 
   return (
     <>
@@ -47,7 +30,7 @@ const ProductList: React.FC = () => {
               <img src={product.image} alt={product.name} />
 
               <h1>{product.name}</h1>
-              <span>Preço: {product.price} R$</span>
+              <span>Preço: {Number(product.price).toFixed(2)} R$</span>
             </ProductContainer>
           </Link>
         ))}
@@ -56,4 +39,4 @@ const ProductList: React.FC = () => {
   );
 };
 
-export default ProductList;
+export default memo(ProductList);

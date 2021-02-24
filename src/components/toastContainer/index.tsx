@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTransition } from 'react-spring';
 import { ToastMessage } from '../../hooks/toast';
 import { Container } from './styles';
@@ -28,4 +28,4 @@ const ToastContainer: React.FC<ToastContainerProps> = ({ messages }) => {
   );
 };
 
-export default ToastContainer;
+export default memo(ToastContainer);

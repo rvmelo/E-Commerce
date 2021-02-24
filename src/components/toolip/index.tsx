@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Container } from './styles';
 
 interface TooltipProps {
   title: string;
   className?: string;
+  children: React.ReactElement;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
@@ -17,4 +18,4 @@ const Tooltip: React.FC<TooltipProps> = ({
   </Container>
 );
 
-export default Tooltip;
+export default memo(Tooltip);

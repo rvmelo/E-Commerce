@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import useProductDetail from '../useProductDetail';
 
@@ -61,4 +61,4 @@ const ProductDetail: React.FC = () => {
   );
 };
 
-export default ProductDetail;
+export default memo(ProductDetail);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Form } from '@unform/web';
 import { BsCreditCard, BsPerson, BsCalendar, BsMap } from 'react-icons/bs';
 import Header from '../../../components/header';
@@ -55,4 +55,4 @@ const Payment: React.FC = () => {
   );
 };
 
-export default Payment;
+export default memo(Payment);

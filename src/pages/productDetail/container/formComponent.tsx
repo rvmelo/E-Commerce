@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { FormEvent } from 'react';
+import React, { FormEvent, memo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { OrderProduct } from '../../../interfaces';
 
@@ -69,4 +69,4 @@ const FormComponent: React.FC<FormProps> = ({
   );
 };
 
-export default FormComponent;
+export default memo(FormComponent);

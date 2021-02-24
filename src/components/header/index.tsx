@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FiLogOut, FiShoppingCart, FiCoffee } from 'react-icons/fi';
 import { HeaderContainer } from './styles';
@@ -43,4 +43,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
