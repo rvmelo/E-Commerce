@@ -4,13 +4,15 @@ import { FiLogOut, FiShoppingCart, FiCoffee } from 'react-icons/fi';
 import { HeaderContainer } from './styles';
 
 import useHeader from './useHeader';
+import { useRecord } from '../../hooks/record';
 
 const Header: React.FC = () => {
   const { handleSignOut, customer } = useHeader();
+  const { order } = useRecord();
 
   return (
     <HeaderContainer>
-      <div className="left-div">
+      <div id="left-div">
         <FiCoffee />
 
         <div>
@@ -18,14 +20,23 @@ const Header: React.FC = () => {
           <span className="userName">{customer.name}</span>
         </div>
       </div>
-      <div className="right-div">
+      <div id="right-div">
         <nav>
           <ul>
             <li>
               <NavLink to="/cart" exact activeClassName="is-active">
                 <FiShoppingCart />
-                Carrinho
               </NavLink>
+            </li>
+            <li id="quantity_indicator">
+              {order.order_products && (
+                <span className="circled-number">
+                  {order.order_products.reduce((total, orderProduct) => {
+                    total += orderProduct.quantity;
+                    return total;
+                  }, 0)}
+                </span>
+              )}
             </li>
             <li>
               <NavLink to="/productlist" activeClassName="is-active">

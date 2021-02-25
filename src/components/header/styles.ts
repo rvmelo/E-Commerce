@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-around;
   align-items: center;
 
-  .left-div {
+  #left-div {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -30,10 +30,24 @@ export const HeaderContainer = styled.header`
     }
   }
 
-  .right-div {
+  .circled-number {
+    color: #ff9000;
+    background: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  #right-div {
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 100%;
 
     button {
       svg {
@@ -51,7 +65,8 @@ export const HeaderContainer = styled.header`
 
     nav {
       display: flex;
-      flex-direction: column;
+
+      height: 100%;
 
       svg {
         margin-right: 7px;
@@ -61,8 +76,13 @@ export const HeaderContainer = styled.header`
         display: flex;
         list-style: none;
 
+        #quantity_indicator {
+          margin-left: 1px;
+          margin-top: 25px;
+        }
+
         li {
-          margin-left: 30px;
+          margin: auto 0 auto 30px;
         }
 
         .is-active {
@@ -78,15 +98,16 @@ export const HeaderContainer = styled.header`
   }
 
   @media (max-width: 490px) {
-    .left-div {
+    #left-div {
       display: none;
     }
-    .right-div {
+    #right-div {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      button {
-        margin-top: 15px;
+
+      #quantity_indicator {
+        margin-top: 0;
       }
     }
   }
