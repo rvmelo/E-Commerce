@@ -8,6 +8,10 @@ export const Container = styled.div`
   align-items: stretch;
 `;
 
+export const SpinnerContainer = styled.div`
+  margin-top: 10px;
+`;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;

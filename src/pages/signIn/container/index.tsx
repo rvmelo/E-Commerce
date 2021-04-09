@@ -28,7 +28,7 @@ const override = css`
 `;
 
 const SignIn: React.FC = () => {
-  const { formRef, handleSubmit, loading } = useSignIn();
+  const { formRef, handleSubmit, isLoading } = useSignIn();
 
   return (
     <Container>
@@ -44,7 +44,7 @@ const SignIn: React.FC = () => {
               type="password"
               placeholder="Senha"
             />
-            {!loading ? (
+            {!isLoading ? (
               <Button type="submit">Entrar</Button>
             ) : (
               <SpinnerContainer>

@@ -15,14 +15,14 @@ interface SignInFormData {
 interface ReturnValue {
   formRef: React.RefObject<FormHandles>;
   handleSubmit(data: SignInFormData): void;
-  loading: boolean;
+  isLoading: boolean;
 }
 
 function useSignIn(): ReturnValue {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
 
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
@@ -71,7 +71,7 @@ function useSignIn(): ReturnValue {
   return {
     formRef,
     handleSubmit,
-    loading,
+    isLoading,
   };
 }
 

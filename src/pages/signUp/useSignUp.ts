@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -16,6 +16,7 @@ interface SignUpFormData {
 interface ReturnValue {
   formRef: React.RefObject<FormHandles>;
   handleSubmit(data: SignUpFormData): void;
+  isLoading: boolean;
 }
 
 function SignUp(): ReturnValue {
@@ -23,9 +24,12 @@ function SignUp(): ReturnValue {
   const { addToast } = useToast();
   const history = useHistory();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
       try {
+        setIsLoading(true);
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome Obrigatório'),
@@ -47,8 +51,11 @@ function SignUp(): ReturnValue {
           description: 'Você já pode fazer seu logon no Virtual Café',
         });
 
+        setIsLoading(false);
+
         history.push('/');
       } catch (err) {
+        setIsLoading(false);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
@@ -67,6 +74,7 @@ function SignUp(): ReturnValue {
   return {
     formRef,
     handleSubmit,
+    isLoading,
   };
 }
 

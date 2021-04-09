@@ -1,8 +1,20 @@
 import React, { memo } from 'react';
+import { css } from '@emotion/react';
 import { Form } from '@unform/web';
+
 import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { Container, Content, Background, AnimationContainer } from './styles';
+
+import { FadeLoader } from 'react-spinners';
+
+import {
+  Container,
+  Content,
+  Background,
+  AnimationContainer,
+  SpinnerContainer,
+} from './styles';
+
 import logoImg from '../../../assets/logo.png';
 
 import Button from '../../../components/button';
@@ -10,8 +22,13 @@ import Input from '../../../components/input';
 
 import useSignUp from '../useSignUp';
 
+const override = css`
+  display: flex;
+  margin: auto;
+`;
+
 const SignUp: React.FC = () => {
-  const { formRef, handleSubmit } = useSignUp();
+  const { formRef, handleSubmit, isLoading } = useSignUp();
 
   return (
     <Container>
@@ -29,7 +46,13 @@ const SignUp: React.FC = () => {
               type="password"
               placeholder="Senha"
             />
-            <Button type="submit">Cadastrar</Button>
+            {!isLoading ? (
+              <Button type="submit">Cadastrar</Button>
+            ) : (
+              <SpinnerContainer>
+                <FadeLoader css={override} color="#ff9000" />
+              </SpinnerContainer>
+            )}
             <Link to="/signup">Esqueci minha senha</Link>
           </Form>
           <Link to="/">
