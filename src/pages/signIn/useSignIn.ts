@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -15,11 +15,14 @@ interface SignInFormData {
 interface ReturnValue {
   formRef: React.RefObject<FormHandles>;
   handleSubmit(data: SignInFormData): void;
+  loading: boolean;
 }
 
 function useSignIn(): ReturnValue {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
+
+  const [loading, setIsLoading] = useState(false);
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
@@ -27,6 +30,7 @@ function useSignIn(): ReturnValue {
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
       try {
+        setIsLoading(true);
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
           email: Yup.string()
@@ -44,8 +48,11 @@ function useSignIn(): ReturnValue {
           password: data.password,
         });
 
+        setIsLoading(false);
+
         history.push('/productlist');
       } catch (err) {
+        setIsLoading(false);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
@@ -64,6 +71,7 @@ function useSignIn(): ReturnValue {
   return {
     formRef,
     handleSubmit,
+    loading,
   };
 }
 
