@@ -14,6 +14,7 @@ import { OrderProduct, Order } from '../interfaces';
 
 interface RecordContextData {
   addOrderProduct(orderProduct: OrderProduct): void;
+  removeOrderProduct(orderProduct: OrderProduct): void;
   setOrder(order: Order): void;
   retrieveOrder(): void;
   order: Order;
@@ -70,9 +71,27 @@ const RecordProvider: React.FC = ({ children }) => {
     });
   }, []);
 
+  const removeOrderProduct = useCallback((orderProduct: OrderProduct) => {
+    setOrder(prev => {
+      const order_products = prev.order_products.filter(
+        op => op.product_id !== orderProduct.product_id,
+      );
+      return {
+        ...prev,
+        order_products,
+      };
+    });
+  }, []);
+
   return (
     <RecordContext.Provider
-      value={{ addOrderProduct, order, setOrder, retrieveOrder }}
+      value={{
+        addOrderProduct,
+        order,
+        setOrder,
+        retrieveOrder,
+        removeOrderProduct,
+      }}
     >
       {children}
     </RecordContext.Provider>

@@ -29,7 +29,7 @@ const Header: React.FC = () => {
               </NavLink>
             </li>
             <li id="quantity_indicator">
-              {order.order_products && (
+              {order.order_products && order.order_products.length > 0 && (
                 <span className="circled-number">
                   {order.order_products.reduce((total, orderProduct) => {
                     total += orderProduct.quantity;

@@ -7,7 +7,7 @@ import Button from '../../../components/button';
 import CartTable from './cartTable';
 
 const Cart: React.FC = () => {
-  const { total, order } = useCart();
+  const { total, order, removeOrderProduct } = useCart();
   const history = useHistory();
 
   return (
@@ -16,10 +16,18 @@ const Cart: React.FC = () => {
       <Container>
         <h1>Carrinho de Compras</h1>
 
-        <CartTable total={total} order={order} />
+        <CartTable
+          total={total}
+          order={order}
+          removeOrderProduct={removeOrderProduct}
+        />
 
-        {order.order_products && (
-          <Button type="submit" onClick={() => history.push('/payment')}>
+        {order.order_products && order.order_products.length > 0 && (
+          <Button
+            id="conclude-button"
+            type="submit"
+            onClick={() => history.push('/payment')}
+          >
             Concluir Compra
           </Button>
         )}

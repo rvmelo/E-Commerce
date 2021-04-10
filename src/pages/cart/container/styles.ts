@@ -1,3 +1,4 @@
+import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -10,7 +11,7 @@ export const Container = styled.div`
     margin: 30px 0;
   }
 
-  button {
+  #conclude-button {
     width: 300px;
   }
 
@@ -40,13 +41,33 @@ export const Container = styled.div`
       display: none;
     }
 
+    .action {
+      display: none;
+    }
+
     table {
       padding: 15px;
       width: 100vw;
     }
 
-    button {
+    #conclude-button {
       width: 200px;
     }
+  }
+`;
+
+export const RemoveButton = styled.button`
+  background: #c53030;
+  height: 46px;
+  border-radius: 10px;
+  border: 0;
+  padding: 0 16px;
+  color: #fff;
+  width: 100px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#c53030')};
   }
 `;
