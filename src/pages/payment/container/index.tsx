@@ -15,7 +15,7 @@ const Payment: React.FC = () => {
       <Header />
       <Container>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Informação do Cartão</h1>
+          <h1>Credit Card Info</h1>
 
           <Input
             className="card_information"
@@ -37,7 +37,7 @@ const Payment: React.FC = () => {
             placeholder="CVC"
           />
 
-          <h1>Nome no Cartão</h1>
+          <h1>Name on Credit Card</h1>
 
           <Input
             name="name_on_card"
@@ -45,10 +45,10 @@ const Payment: React.FC = () => {
             placeholder="Wesley Snipes (Nome no Cartão)"
           />
 
-          <h1>País ou Região</h1>
+          <h1>Country or Region</h1>
 
           <Input name="country" icon={BsMap} placeholder="Brazil" />
-          <Button type="submit">Efetuar Compra</Button>
+          <Button type="submit">Process Transaction</Button>
         </Form>
       </Container>
     </>

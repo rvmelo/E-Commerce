@@ -40,12 +40,12 @@ const ProductDetail: React.FC = () => {
           </ProductImage>
 
           <h1>{name}</h1>
-          <h2>R$ {(quantity * price).toFixed(2)} </h2>
+          <h2>${(quantity * price).toFixed(2)} </h2>
         </ProductData>
 
         {isProductOnCart ? (
           <Button type="submit" onClick={() => history.push('/cart')}>
-            Ver Carrinho
+            Check Cart
           </Button>
         ) : (
           <FormComponent

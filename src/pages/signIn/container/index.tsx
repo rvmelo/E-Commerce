@@ -36,7 +36,7 @@ const SignIn: React.FC = () => {
         <AnimationContainer>
           <img src={logoImg} alt="Virtual Coffee" />
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faça seu login</h1>
+            <h1>User Login</h1>
             <Input name="email" icon={FiMail} placeholder="E-mail" />
             <Input
               name="password"
@@ -45,17 +45,17 @@ const SignIn: React.FC = () => {
               placeholder="Senha"
             />
             {!isLoading ? (
-              <Button type="submit">Entrar</Button>
+              <Button type="submit">Login</Button>
             ) : (
               <SpinnerContainer>
                 <FadeLoader css={override} color="#ff9000" />
               </SpinnerContainer>
             )}
-            <Link to="/">Esqueci minha senha</Link>
+            <Link to="/">Forgot Username/Password</Link>
           </Form>
           <Link to="/signup">
             <FiLogIn />
-            Criar conta
+            Create Account
           </Link>
         </AnimationContainer>
       </Content>

@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         <FiCoffee />
 
         <div>
-          <span>Bem vindo,</span>
+          <span>Welcome,</span>
           <span className="userName">{customer.name}</span>
         </div>
       </div>
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
             <li>
               <NavLink to="/productlist" activeClassName="is-active">
                 <FiCoffee />
-                Produtos
+                Menu
               </NavLink>
             </li>
           </ul>
