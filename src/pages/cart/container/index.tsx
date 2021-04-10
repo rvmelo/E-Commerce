@@ -14,7 +14,7 @@ const Cart: React.FC = () => {
     <>
       <Header />
       <Container>
-        <h1>Carrinho de Compras</h1>
+        <h1>Shopping Cart</h1>
 
         <CartTable
           total={total}

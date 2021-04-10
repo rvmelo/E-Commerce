@@ -46,7 +46,7 @@ const FormComponent: React.FC<FormProps> = ({
       }
     >
       <label htmlFor="quantity">
-        Quantidade:
+        Quantity:
         <input
           type="number"
           onChange={e => setQuantity(Number(e.target.value))}
@@ -61,10 +61,10 @@ const FormComponent: React.FC<FormProps> = ({
         <textarea
           id="observation"
           onChange={e => setNote(e.target.value)}
-          placeholder="Digite observação sobre pedido"
+          placeholder="Type observations related to your order"
         />
       </TextAreaContainer>
-      <Button type="submit">Adicionar ao carrinho</Button>
+      <Button type="submit">Add to Cart</Button>
     </Form>
   );
 };
