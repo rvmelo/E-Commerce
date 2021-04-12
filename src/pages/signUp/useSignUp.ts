@@ -32,11 +32,11 @@ function SignUp(): ReturnValue {
         setIsLoading(true);
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
-          name: Yup.string().required('Nome Obrigatório'),
+          name: Yup.string().required('Name required'),
           email: Yup.string()
-            .required('E-mail Obrigatório')
-            .email('Digite um email válido'),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+            .required('Email required')
+            .email('Type a valid email'),
+          password: Yup.string().min(6, 'At least 6 digits'),
         });
 
         await schema.validate(data, {
@@ -47,8 +47,8 @@ function SignUp(): ReturnValue {
 
         addToast({
           type: 'success',
-          title: 'Cadastro realizado!',
-          description: 'Você já pode fazer seu logon no Virtual Café',
+          title: 'Account created!',
+          description: 'You are now able to log in at virtual coffee',
         });
 
         setIsLoading(false);
@@ -63,8 +63,8 @@ function SignUp(): ReturnValue {
         }
         addToast({
           type: 'error',
-          title: 'Erro no cadastro',
-          description: 'Ocorreu um erro ao fazer cadastro, tente novamente',
+          title: 'SignUp Error',
+          description: 'Sign up failed, try again',
         });
       }
     },

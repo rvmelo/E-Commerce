@@ -40,16 +40,16 @@ function usePayment(): ReturnValue {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
           card_number: Yup.string()
-            .required('Número do cartão obrigatório')
-            .min(16, 'Cartão inválido'),
+            .required('Card number required')
+            .min(16, 'Invalid card'),
           cvc: Yup.string()
-            .min(3, 'CVC inválido')
-            .max(3, 'CVC inválido')
-            .required('CVC obrigatório'),
+            .min(3, 'Invalid CVC')
+            .max(3, 'Invalid CVC')
+            .required('CVC required'),
           card_validation_date: Yup.string()
-            .min(5, 'Data inválida')
-            .max(5, 'Data inválida')
-            .test('date-test', 'Data inválida', function validate(value) {
+            .min(5, 'Invalid date')
+            .max(5, 'Invalid date')
+            .test('date-test', 'Invalid Date', function validate(value) {
               const dataValues = value?.split('/');
               if (
                 dataValues &&
@@ -61,13 +61,13 @@ function usePayment(): ReturnValue {
               }
               return false;
             })
-            .required('Data obrigatória'),
+            .required('Date required'),
           name_on_card: Yup.string()
-            .min(3, 'Nome inválido')
-            .required('Nome obrigatório'),
+            .min(3, 'Invalid name')
+            .required('Name required'),
           country: Yup.string()
-            .min(3, 'País não existe')
-            .required('País obrigatório'),
+            .min(3, 'This country does not exist')
+            .required('Country required'),
         });
 
         await schema.validate(paymentData, {
@@ -76,8 +76,8 @@ function usePayment(): ReturnValue {
 
         addToast({
           type: 'success',
-          title: 'Pagamento',
-          description: 'Pagamento realizado com sucesso!',
+          title: 'Payment',
+          description: 'Payment successfully completed!',
         });
 
         const orderResponse = await api.post('/orders', {
@@ -100,9 +100,8 @@ function usePayment(): ReturnValue {
         }
         addToast({
           type: 'error',
-          title: 'Falha no pagamento',
-          description:
-            'Ocorreu um erro ao efetuar pagamento, cheque os dados de seu cartão',
+          title: 'Payment Error',
+          description: 'Payment failed, check your card data',
         });
       }
     },

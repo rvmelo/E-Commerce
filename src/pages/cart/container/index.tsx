@@ -28,7 +28,7 @@ const Cart: React.FC = () => {
             type="submit"
             onClick={() => history.push('/payment')}
           >
-            Concluir Compra
+            Purchase
           </Button>
         )}
       </Container>

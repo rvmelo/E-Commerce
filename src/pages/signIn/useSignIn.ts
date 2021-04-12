@@ -34,9 +34,9 @@ function useSignIn(): ReturnValue {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
           email: Yup.string()
-            .required('E-mail Obrigatório')
-            .email('Digite um email válido'),
-          password: Yup.string().required('Senha obrigatória'),
+            .required('Email required')
+            .email('Type a valid email'),
+          password: Yup.string().required('Password required'),
         });
 
         await schema.validate(data, {
@@ -60,8 +60,8 @@ function useSignIn(): ReturnValue {
         }
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
+          title: 'Authentication Error',
+          description: 'Failed to login, check your credentials',
         });
       }
     },

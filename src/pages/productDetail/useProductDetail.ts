@@ -47,8 +47,8 @@ function useProductDetail({ product_id }: ProductProps): ReturnValue {
 
       addToast({
         type: 'success',
-        title: 'Carrinho',
-        description: 'Produto adicionado ao carrinho!',
+        title: 'Cart',
+        description: 'Coffee added to cart!',
       });
     },
     [addOrderProduct, addToast],
