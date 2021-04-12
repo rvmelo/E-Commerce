@@ -38,13 +38,13 @@ const SignUp: React.FC = () => {
           <img src={logoImg} alt="Virtual-Cafe" />
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Sign Up</h1>
-            <Input name="name" icon={FiUser} placeholder="Nome" />
-            <Input name="email" icon={FiMail} placeholder="E-mail" />
+            <Input name="name" icon={FiUser} placeholder="Name" />
+            <Input name="email" icon={FiMail} placeholder="Email" />
             <Input
               name="password"
               icon={FiLock}
               type="password"
-              placeholder="Senha"
+              placeholder="Password"
             />
             {!isLoading ? (
               <Button type="submit">Create Account</Button>

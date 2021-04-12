@@ -35,24 +35,25 @@ export const ProductData = styled.div`
 `;
 
 export const ProductImage = styled.div`
-  width: 500px;
+  max-width: 650px;
   height: 500px;
   margin-top: 30px;
   overflow: hidden;
   border-radius: 10px;
 
   img {
-    width: 100%;
+    object-fit: cover;
+    max-width: 650px;
     height: 100%;
   }
 
   @media (max-width: 490px) {
-    width: 250px;
+    max-width: 400px;
     height: 250px;
   }
 
   @media (max-width: 890px) {
-    width: 200px;
+    max-width: 350px;
     height: 200px;
   }
 `;

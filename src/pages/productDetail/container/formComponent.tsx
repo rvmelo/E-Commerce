@@ -61,7 +61,7 @@ const FormComponent: React.FC<FormProps> = ({
         <textarea
           id="observation"
           onChange={e => setNote(e.target.value)}
-          placeholder="Type observations related to your order"
+          placeholder="Observations"
         />
       </TextAreaContainer>
       <Button type="submit">Add to Cart</Button>

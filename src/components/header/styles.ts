@@ -101,14 +101,5 @@ export const HeaderContainer = styled.header`
     #left-div {
       display: none;
     }
-    #right-div {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-
-      #quantity_indicator {
-        margin-top: 0;
-      }
-    }
   }
 `;

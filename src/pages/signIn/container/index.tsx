@@ -37,12 +37,12 @@ const SignIn: React.FC = () => {
           <img src={logoImg} alt="Virtual Coffee" />
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>User Login</h1>
-            <Input name="email" icon={FiMail} placeholder="E-mail" />
+            <Input name="email" icon={FiMail} placeholder="Email" />
             <Input
               name="password"
               icon={FiLock}
               type="password"
-              placeholder="Senha"
+              placeholder="Password"
             />
             {!isLoading ? (
               <Button type="submit">Login</Button>
